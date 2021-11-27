@@ -1,0 +1,57 @@
+<div>
+  <h1 class="text-center product-header"><i class="fa fa-sitemap" style="color: #dd9c3e;"></i><strong> {{categoryTitle}} PRODUCTS </strong></h1>
+  <hr>
+  <form [formGroup]="form">
+    <div class="row d-flex justify-content-center">
+      <input type="hidden" id="username" name="username">
+      <mat-card class="example-card" *ngFor="let product of products; let i = index">
+        <section>
+          <img mat-card-image [src]="imgPATH + product.img" [alt]="product.alt" width="auto" height="auto">
+        </section>
+        <mat-card-content class="desc text-justify mt-2">
+          <div class="form-group row m-1">
+            <label class="col-4 control-label"><strong>Name</strong></label>
+            <div class="col">
+              {{product.name}}
+            </div>
+          </div>
+          <div class="form-group row m-1">
+            <label class="col-4 control-label"><strong>Description</strong></label>
+            <div class="col">
+              {{product.description}}
+            </div>
+          </div>
+          <div class="form-group row m-1">
+            <label class="col-4 control-label"><strong>Size</strong></label>
+            <div class="col">
+              {{product.size}}
+            </div>
+          </div>
+          <div class="form-group row m-1">
+            <label class="col-4 control-label"><strong>Price</strong></label>
+            <div class="col">
+              {{product.price}} SR
+            </div>
+          </div>
+          <div class="form-group row m-1">
+            <label class="col-4 control-label"><strong>Status</strong></label>
+            <div class="col text-success" *ngIf="product.quantity > 0">In Stock</div>
+            <div class="col text-danger" *ngIf="product.quantity == 0">Out of Stock</div>
+          </div>
+          <div class="form-group row m-1" *ngIf="authService.isLoggedIn == true && authService.userRole == 'user'">
+            <label class="col-4 control-label mt-2"><strong>Quantity</strong></label>
+            <div class="col">
+              <input type="number" formControlName="{{product._id}}" name="{{product._id}}" id="{{product._id}}" class="form-control"
+              min="1" value="0" style="width: 70px">
+            </div>
+          </div>
+        </mat-card-content>
+        <hr *ngIf="authService.isLoggedIn == true && authService.userRole == 'user'">
+        <mat-card-actions *ngIf="authService.isLoggedIn == true && authService.userRole == 'user'">
+          <button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="Shopping Cart" (click)="addToShoppingCart(product)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+          <button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="Wish List" (click)="addToWishList(product)"><i class="fa fa-heart" aria-hidden="true"></i></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,138 @@
+<div>
+  <h1 class="text-center order-header"><i class="fa fa-list-alt" style="color: #dd9c3e;"></i><strong> ORDERS </strong></h1>
+  <hr>
+  <div *ngIf="orders.length == 0" class="alert alert-warning h3 text-center mt-3" role="alert">
+    No Orders are available
+  </div>
+  <div *ngIf="order != null">
+    <div *ngIf="showMessage === 1" class="alert alert-danger mt-1" role="alert">
+      Error While Saving Order
+    </div>
+
+    <div *ngIf="showMessage === 2" class="alert alert-success mt-1" role="alert">
+      Order Sent Successfully!
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <input type="hidden" name="_id" formControlName="_id" [value]="order._id">
+      <div class="form-group row">
+        <div class="col-6">
+          <label class="col-3 form-label"><strong>Order#</strong></label>
+          <label class="col-3 form-label">{{order._id}}</label>
+        </div>
+        <div class="col-6">
+          <label class="col-3 form-label"><strong>Order Date</strong></label>
+          <label class="col-3 form-label">{{order.orderDate | date :'short'}}</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-6">
+          <label class="col-3 form-label"><strong>Full Name</strong></label>
+          <label class="col-3 form-label">{{order.fullName}}</label>
+        </div>
+        <div class="col-6">
+          <label class="col-3 form-label"><strong>Total Price</strong></label>
+          <label class="col-3 form-label">{{order.totalPrice}} SR</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-6">
+          <label class="col-3 form-label"><strong>Order Status</strong></label>
+          <label class="col-3" [ngClass]="{'text-warning': order.status == 'Pending', 'text-success': order.status == 'In Progress'}">
+            {{order.status}}
+          </label>
+        </div>
+      </div>
+      <div class="p-2 border-blue">
+        <table>
+          <thead>
+            <tr>
+              <td>SN#</td>
+              <td>Product</td>
+              <td>Size</td>
+              <td>Quantity</td>
+              <td>Price</td>
+              <td>Total</td>
+              <td *ngIf="order.status == 'Pending'">Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let product of order.orderDetails; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{product.productName}}</td>
+                <td>{{product.size}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.quantity * product.price}}</td>
+                <td *ngIf="order.status == 'Pending'" class="text-center">
+                  <button mat-raised-button type="button" class="mat-raised" color="warn" tooltip="Remove" (click)="removeProduct(product)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group row mt-3">
+        <label class="col-3 form-label"><strong>Payment Method</strong></label>
+        <div class="text-danger" *ngIf="submitted && form.get('paymentMethod').errors"><strong>* Select Payment Method</strong></div>
+        <mat-radio-group formControlName="paymentMethod" #paymentMethod
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group">
+          <mat-radio-button class="example-radio-button ms-3" [checked]="method.value == order.paymentMethod" *ngFor="let method of paymentMethods" [value]="method.value">
+            {{method.title}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="form-group row" *ngIf="form.value.paymentMethod == 'card'">
+        <label class="col-3 form-label"><strong>Payment Cards</strong></label>
+        <div *ngIf="submitted && form.value.paymentMethod == 'card' && form.value.paymentCard == ''" class="text-danger"><strong>* Select Payment Card</strong></div>
+        <mat-radio-group formControlName="paymentCard" #paymentCard 
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group">
+          <mat-radio-button class="example-radio-button ms-3" [checked]="card.cardNumber == selectedCard" *ngFor="let card of user.paymentCards" [value]="card.cardNumber">
+            {{card.cardNumber}} - {{card.month}}/{{card.year}}
+          </mat-radio-button>
+        </mat-radio-group>    
+      </div>
+      <div class="form-group text-center mt-3" *ngIf="order.status === 'Pending'">
+        <button
+          mat-raised-button
+          class="mat-raised"
+          color="primary"
+          type="submit"
+          tooltip="Buy Now"
+          >BUY NOW <i class="fa fa-check-double ms-2" aria-hidden="true"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  <hr>
+  <div class="col mt-3" *ngIf="orders.length > 0" >
+    <h3 style="background-color: #4e5eb3; padding: 5px; color: #e3e6fb; letter-spacing: 1px;"><i class="fa fa-history ms-2" aria-hidden="true"></i><strong>  Orders History</strong></h3>
+    <div class="p-2 border-blue">
+      <table>
+        <thead>
+          <tr>
+            <td>SN#</td>
+            <td>Order#</td>
+            <td>Order Date</td>
+            <td>Order Status</td>
+            <td>Total Price</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders; let i = index">
+              <td>{{ i + 1}}</td>
+              <td>{{order._id}}</td>
+              <td>{{order.orderDate | date: 'short'}}</td>
+              <td>{{order.status}}</td>
+              <td>{{order.totalPrice}}</td>
+              <td class="text-center">
+                <button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="View" (click)="viewOrder(order)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

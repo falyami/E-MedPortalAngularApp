@@ -1,0 +1,70 @@
+.example-card {
+    width: 240px !important;
+    height: 430px !important;
+    margin: 10px !important;
+    display: inline-block !important;
+}
+
+.example-header-image {
+    background-size: cover !important;
+    background-color: #dcdeeb !important;
+}
+
+.mat-card {
+    cursor: pointer !important;
+}
+
+.mat-card-header {
+    height: 55px !important;
+}
+
+h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+.category-header {
+    color: #fff !important;
+    background-color: #4e5eb3 !important; 
+    padding: 16px !important; 
+    border-radius: 4px !important;
+    letter-spacing: 5px !important;
+}
+
+.desc p {
+    margin: 0 !important;
+    text-align: justify !important;
+}
+
+.mat-card-actions {
+    text-align: center !important;
+    bottom: 0px !important;
+}
+
+.mat-card-image:first-child {
+    margin-top: 20px !important;
+    width: auto !important;
+}
+
+.mat-card-image {
+    margin: 0 !important;
+}
+
+section {
+    background-color: #cfd2e5 !important;
+    height: 100px !important;
+    text-align: center !important;
+    border-radius: 4px !important;
+}
+
+.mat-card-content {
+    height: 180px !important;
+}
+
+hr {
+    margin: 0px !important;
+}
+
+.mat-raised-button {
+    letter-spacing: 3px !important;
+}
+

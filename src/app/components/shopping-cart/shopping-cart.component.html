@@ -1,0 +1,55 @@
+<div>
+    <h1 class="text-center product-header"><i class="fa fa-sitemap" style="color: #dd9c3e;"></i><strong> SHOPPING CART </strong></h1>
+    <hr>
+    <div *ngIf="shoppingCartProducts.length == 0" class="alert alert-warning h3 text-center mt-3" role="alert">
+      No Products are Available in Shopping Cart
+    </div>
+      <div class="row d-flex justify-content-center mt-3">
+        <div *ngIf="shoppingCartProducts.length > 0" >
+            <mat-card class="example-card" *ngFor="let product of shoppingCartProducts; let i = index">
+                <section>
+                  <img mat-card-image [src]="imgPATH + product.img" [alt]="product.name" width="auto" height="auto">
+                </section>
+                <mat-card-content class="desc text-justify mt-2">
+                  <div class="form-group row m-1">
+                    <label class="col-4 control-label"><strong>Name</strong></label>
+                    <div class="col">
+                      {{product.name}}
+                    </div>
+                  </div>
+                  <div class="form-group row m-1">
+                    <label class="col-4 control-label"><strong>Description</strong></label>
+                    <div class="col">
+                      {{product.description}}
+                    </div>
+                  </div>
+                  <div class="form-group row m-1">
+                    <label class="col-4 control-label"><strong>Size</strong></label>
+                    <div class="col">
+                      {{product.size}}
+                    </div>
+                  </div>
+                  <div class="form-group row m-1">
+                    <label class="col-4 control-label"><strong>Price</strong></label>
+                    <div class="col">
+                      {{product.price}} SR
+                    </div>
+                  </div>
+                  <div class="form-group row m-1">
+                    <label class="col-4 control-label"><strong>Quantity</strong></label>
+                    <div class="col">
+                      {{product.quantity}}
+                    </div>
+                  </div>
+                </mat-card-content>
+                <hr>
+                <mat-card-actions>
+                  <button mat-raised-button type="button" class="mat-raised" color="warn" tooltip="Remove Product" (click)="removeProductFromCart(product)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </mat-card-actions>
+              </mat-card>
+              <div *ngIf="apiService.username !== ''" class="form-group text-center mt-5 mb-3">
+                <button mat-raised-button class="mat-raised" color="primary" type="button" tooltip="Prepare Order" (click)="prepareOrder()">PREPARE ORDER <i class="fa fa-location-arrow ms-2" aria-hidden="true"></i></button>
+              </div>
+        </div>
+      </div>
+  </div>

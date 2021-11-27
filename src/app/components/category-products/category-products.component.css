@@ -1,0 +1,64 @@
+.example-card {
+    width: 300px !important;
+    height: auto !important;
+    margin: 10px !important;
+    display: inline-block !important;
+}
+
+.example-header-image {
+    background-size: cover !important;
+    background-color: #dcdeeb !important;
+}
+
+.mat-card {
+    cursor: pointer !important;
+}
+
+.mat-card-header {
+    height: 55px !important;
+}
+
+h1, h4 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+.product-header {
+    color: #fff !important;
+    background-color: #4e5eb3 !important; 
+    padding: 16px !important; 
+    border-radius: 4px !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+}
+
+.desc h4 {
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+.mat-card-actions {
+    text-align: center !important;
+    margin: 0 !important;
+}
+
+section {
+    text-align: center !important;
+    border-radius: 4px !important;
+}
+
+.mat-card-content {
+    height: 250px !important;
+    overflow:hidden !important;
+}
+
+hr {
+    margin: 0px !important;
+}
+
+.mat-raised-button {
+    margin: 0 !important;
+    margin-right: 5px !important;
+    min-width: 45px !important;
+    letter-spacing: 3px !important;
+}
+

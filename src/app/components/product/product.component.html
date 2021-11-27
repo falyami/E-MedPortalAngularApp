@@ -1,0 +1,44 @@
+<div>
+    <form #productForm="ngForm" id="productForm">
+      <div class="row d-flex justify-content-center">
+        <mat-card class="example-card">
+          <section>
+            <img mat-card-image [src]="product.img" [alt]="product.alt" width="auto" height="auto">
+          </section>
+          <mat-card-content class="desc text-justify mt-2">
+            <div class="form-group row m-1">
+              <label class="col-4 control-label"><strong>DESCRIPTION</strong></label>
+              <div class="col">
+                {{product.description}}
+              </div>
+            </div>
+            <div class="form-group row m-2">
+              <label class="col-4 control-label"><strong>SIZE</strong></label>
+              <div class="col">
+                {{product.size}}
+              </div>
+            </div>
+            <div class="form-group row m-2">
+              <label class="col-4 control-label"><strong>PRICE</strong></label>
+              <div class="col">
+                {{product.price}} SR
+              </div>
+            </div>
+            <div class="form-group row m-2">
+              <label class="col-4 control-label mt-2"><strong>QUANTITY</strong></label>
+              <div class="col">
+                <input type="number" name="quantity" id="quantity" class="form-control"
+                min="1" value="1" style="width: 100px" max="{{product.quantity}}" ngModel>
+              </div>
+            </div>
+          </mat-card-content>
+          <hr>
+          <mat-card-actions>
+            <button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="Shopping Cart" (click)="addToShoppingCart(product._id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+            <button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="Wish List" (click)="addToWishList(product._id)"><i class="fa fa-heart" aria-hidden="true"></i></button>
+            <button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="Back to List" (click)="goBackToProducts(product.categoryId)"><i class="fa fa-backward" aria-hidden="true"></i></button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </form>
+</div>

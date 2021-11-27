@@ -1,0 +1,79 @@
+<div class="row g-2">
+  <div class="col-md-4">
+    <div class="p-4 border-blue">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3">
+          <div class="text-center">
+            <h2 style="background-color: #4e5eb3; padding: 10px; color: #e3e6fb; letter-spacing: 1px;"><strong>ADMINISTRATOR</strong></h2>
+            <hr>
+          </div>
+
+          <div id="divErrorMessage" *ngIf="showMessage === 1" class="alert alert-danger" role="alert">
+              Username or Email Already Registered
+          </div>
+
+          <div id="divSuccessMessage" *ngIf="showMessage === 2" class="alert alert-success" role="alert">
+              Administrator Saved Successfully!
+          </div>
+          
+          <div class="form-group col-12">
+            <label>Full Name</label>
+            <input type="hidden" formControlName="_id" />
+            <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.get('fullName').errors }" />
+          </div>
+
+          <div class="form-group col-12">
+            <label>Username</label>
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.get('username').errors }" />
+          </div>
+
+          <div class="form-group col-12">
+            <label>Email</label>
+            <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.get('email').errors }" />
+          </div>
+  
+          <div class="form-group col-12">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.get('password').errors }" />
+          </div>
+
+          <div class="form-check m-2">
+              <input class="form-check-input" type="checkbox" formControlName="status" id="status">
+              <label class="form-check-label" for="status">
+                Activate User
+              </label>
+          </div>
+  
+          <div class="form-group text-center">
+            <button mat-raised-button class="mat-raised" color="primary" type="submit" tooltip="Save Aministrator">SAVE <i class="fa fa-share ms-2" aria-hidden="true"></i></button>
+            <button mat-raised-button class="mat-raised" color="primary" type="button" tooltip="Reset Form" (click)="resetForm()">RESET <i class="fa fa-redo-alt ms-2" aria-hidden="true"></i></button>
+          </div>
+        </form>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="p-2 border-blue">
+        <table>
+            <thead>
+                <tr>
+                  <td>Full Name</td>
+                  <td>Username</td>
+                  <td>Email</td>
+                  <td>Activation</td>
+                  <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let admin of administrators">
+                  <td>{{admin.fullName}}</td>
+                  <td>{{admin.username}}</td>
+                  <td>{{admin.email}}</td>
+                  <td *ngIf="admin.status == true" class="text-center"><i class="fa fa-check text-success fs-5" aria-hidden="true"></i></td>
+                  <td *ngIf="admin.status == false" class="text-center"><i class="fa fa-times text-danger fs-5" aria-hidden="true"></i></td>
+                  <td class="text-center"><button mat-raised-button type="button" class="mat-raised" color="primary" tooltip="Edit" (click)="editAdministrator(admin)"><i class="fa fa-user-edit" aria-hidden="true"></i></button>
+                      <button mat-raised-button type="button" class="mat-raised" color="warn" tooltip="Remove" (click)="removeAdministrator(admin._id)"><i class="fa fa-user-times" aria-hidden="true"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>

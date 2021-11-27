@@ -1,0 +1,21 @@
+.mat-raised-button {
+    margin: 0 !important;
+    margin-right: 5px !important;
+    min-width: 45px !important;
+    letter-spacing: 3px !important;
+}
+
+.order-header {
+    color: #fff !important;
+    background-color: #4e5eb3 !important; 
+    padding: 16px !important; 
+    border-radius: 4px !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+}
+
+.form-check-input:checked {
+    background-color: #5b9346 !important;
+    border-color: #8ab47b !important;
+    border-radius: 2px !important;
+}

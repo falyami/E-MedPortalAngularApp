@@ -1,0 +1,24 @@
+<div>
+    <h1 class="text-center category-header"><i class="fa fa-sitemap" style="color: #dd9c3e;"></i><strong>  CATEGORIES </strong></h1>
+    <hr>
+    <div class="row d-flex justify-content-center">
+        <mat-card class="example-card" *ngFor="let category of categories">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image" style="background-image: url('./assets/images/avatar.png');"></div>
+              <mat-card-title>{{category.title}}</mat-card-title>
+            </mat-card-header>
+            <section>
+                <img mat-card-image [src]="category.img" [alt]="category.alt">
+            </section>
+            <mat-card-content class="desc text-justify mt-2">
+              <p>
+                {{category.description}}
+              </p>
+            </mat-card-content>
+            <hr>
+            <mat-card-actions>
+              <button mat-raised-button type="button" class="mat-raised" color="primary" (click)="navigateToProducts(category._id)">VIEW</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
